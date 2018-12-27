@@ -1,16 +1,16 @@
 from wsgiref.simple_server import make_server
 import json
 def app(request,response):
-    response("200 ok", [('Content-Type', 'text/json')])
-    # print(request)
-    line ="<html><body>"
+    response("200 ok", [('Content-Type', 'application/json')])
+    re ={}
     for key ,value in request.items():
-        line+="<div>%s---->%s</div><br>"%(key,value)
-    # map(lambda key,value:line+="<div>%s---->%s</div><br>"%(key,value),request)
+        re[str(key)]=str(value)
 
-    line+="</body></html>"
+    print(type(request))
+    print(type(response))
+ 
     
     
-    return [json.dumps(request).encode("utf-8")]
+    return [json.dumps(re).encode("utf-8")]
 
 make_server('',8080,app).serve_forever()
